@@ -26,6 +26,8 @@
 #include <glib/gi18n.h>
 
 #include "utils.hpp"
+#include "stdio.h"
+#include <cstdlib>
 
 bool stdio_getline(FILE *in, string & str)
 {

@@ -22,6 +22,7 @@
 #include <iostream>
 #include <map>
 
+
 static char ini_data_dir[] = "sdict.data_dir";
 
 int le_sdict_library;
@@ -29,7 +30,7 @@ int le_sdict_library_persist;
 
 ZEND_DECLARE_MODULE_GLOBALS(sdict)
 
-static function_entry sdict_functions[] = {
+static zend_function_entry sdict_functions[] = {
     PHP_FE(sdict_query, NULL)
     PHP_FE(sdict_open,  NULL)
     PHP_FE(sdict_popen, NULL)
@@ -296,7 +297,7 @@ PHP_FUNCTION(sdict_popen)
     char *directory;
     char *key;
     int key_len, name_len;
-    list_entry *le, new_le;
+    zend_rsrc_list_entry *le, new_le;
 
     if (0 == ZEND_NUM_ARGS()) {
         directory = INI_STR(ini_data_dir);
@@ -328,7 +329,7 @@ PHP_FUNCTION(sdict_popen)
     /* Store a reference in the persistence list */
     new_le.ptr = sdict;
     new_le.type = le_sdict_library_persist;
-    zend_hash_add(&EG(persistent_list), key, key_len + 1, &new_le, sizeof(list_entry), NULL);
+    zend_hash_add(&EG(persistent_list), key, key_len + 1, &new_le, sizeof(zend_rsrc_list_entry), NULL);
 
     efree(key);
 }
