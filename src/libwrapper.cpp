@@ -132,7 +132,8 @@ static string parse_data(const gchar *data)
 			if (sec_size) {
 				res+="\n";
 				m_str = g_strndup(p, sec_size);
-				res += xdxf2text(m_str);
+				//res += xdxf2text(m_str);
+				res += m_str;
 				g_free(m_str);
 			}
 			sec_size++;
